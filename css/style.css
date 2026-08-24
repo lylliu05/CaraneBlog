@@ -122,40 +122,9 @@ a:hover {
   box-shadow: var(--shadow);
 }
 
-/* ---------- Hero ---------- */
-.hero {
-  padding: 84px 0 64px;
-  text-align: center;
-  background:
-    radial-gradient(600px 300px at 20% 0%, rgba(79, 110, 247, 0.12), transparent),
-    radial-gradient(600px 300px at 80% 0%, rgba(138, 92, 246, 0.10), transparent);
-}
-
-.hero h1 {
-  font-size: clamp(30px, 5vw, 44px);
-  font-weight: 800;
-  letter-spacing: 1px;
-  background: linear-gradient(120deg, #1f2430, #4f6ef7 60%, #8a5cf6);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.hero p {
-  margin-top: 18px;
-  font-size: 17px;
-  color: var(--text-light);
-}
-
 /* ---------- 项目区 ---------- */
 .projects {
-  padding: 30px 0 60px;
-}
-
-.section-title {
-  font-size: 26px;
-  font-weight: 700;
-  margin-bottom: 28px;
+  padding: 56px 0 60px;
 }
 
 .project-grid {
@@ -296,29 +265,6 @@ a:hover {
   text-decoration: none;
 }
 
-/* ---------- 关于 ---------- */
-.about {
-  padding: 20px 0 70px;
-}
-
-.about-inner {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 32px;
-  box-shadow: var(--shadow);
-}
-
-.about-inner p {
-  color: var(--text-light);
-  margin-top: 10px;
-  font-size: 15px;
-}
-
-.about-inner .section-title {
-  margin-bottom: 6px;
-}
-
 /* ---------- 页脚 ---------- */
 .site-footer {
   border-top: 1px solid var(--border);
@@ -332,9 +278,5 @@ a:hover {
 @media (max-width: 640px) {
   .site-nav a:not(.github-link) {
     display: none;
-  }
-
-  .hero {
-    padding: 56px 0 44px;
   }
 }

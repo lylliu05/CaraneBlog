@@ -33,11 +33,3 @@
 3. `git push` 即可——GitHub Actions 自动扫描两个文件夹、重新生成项目列表并更新网页。
 
 可选：编辑 [scripts/meta.json](scripts/meta.json) 自定义图标、标语、标签等；没有配对文档的文件也会自动生成独立下载卡片。
-
-## 本地预览
-
-无需构建，直接用浏览器打开 `index.html` 即可。
-
-## 启用 GitHub Pages
-
-仓库 **Settings → Pages → Branch** 选择 `main`、目录选 `/ (root)`，保存后约 1 分钟生效。

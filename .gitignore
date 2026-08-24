@@ -7,6 +7,9 @@ desktop.ini
 .vscode/
 .idea/
 
+# 本地私有文件（不上传）
+必看.txt
+
 # 日志与临时文件
 *.log
 *.tmp
