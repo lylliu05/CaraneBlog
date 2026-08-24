@@ -3,7 +3,7 @@
  *
  * 规则：
  *   1. docs/*.md 每个文件生成一张项目卡片（key = 文件名去扩展名）
- *   2. downloads/ 中与 key 同名（扩展名不同）的文件，作为该项目的下载文件
+ *   2. downloads/ 中文件名以 key 开头的均为该项目的安装包，自动取版本号最大的作为下载文件
  *   3. downloads/ 中未配对的文件，生成独立的下载卡片
  *   4. scripts/meta.json 可按 key 覆盖 name/icon/version/description 等字段（可选）
  *
@@ -17,7 +17,6 @@ const DOCS_DIR = path.join(ROOT, "docs");
 const DL_DIR = path.join(ROOT, "downloads");
 const META_FILE = path.join(__dirname, "meta.json");
 const OUT_FILE = path.join(ROOT, "js", "data.js");
-const REPO_DOC_BASE = "https://github.com/lylliu05/CaraneBlog/blob/main/docs";
 
 function listDir(dir, ext) {
   if (!fs.existsSync(dir)) return [];
@@ -46,6 +45,19 @@ function guessPlatform(file) {
 function guessVersion(fileName) {
   const m = path.basename(fileName, path.extname(fileName)).match(/v?\d+\.\d+(\.\d+)*/i);
   return m ? (m[0].toLowerCase().startsWith("v") ? m[0].toLowerCase() : "v" + m[0]) : "";
+}
+
+/** 比较版本号：a > b 返回 1，a < b 返回 -1，相等返回 0 */
+function compareVersions(a, b) {
+  const pa = String(a || "0").replace(/^v/i, "").split(".").map(Number);
+  const pb = String(b || "0").replace(/^v/i, "").split(".").map(Number);
+  for (let i = 0; i < Math.max(pa.length, pb.length); i++) {
+    const x = pa[i] || 0;
+    const y = pb[i] || 0;
+    if (x > y) return 1;
+    if (x < y) return -1;
+  }
+  return 0;
 }
 
 /** 从 markdown 提取第一个 "# 标题" 与第一段正文，作为默认 name/description */
@@ -87,13 +99,19 @@ for (const doc of docs) {
   const key = path.basename(doc, ".md");
   const parsed = parseMarkdown(path.join(DOCS_DIR, doc));
 
-  // 在 downloads 中找配对文件：先精确同名，再"以 key 开头"（如 kairos.md ↔ kairosv4.9.0.apk）
-  const dlFile = downloads.find(
-    (f) => !used.has(f) && path.basename(f, path.extname(f)).toLowerCase() === key.toLowerCase()
-  ) || downloads.find(
+  // 在 downloads 中找配对文件：文件名以 key 开头（如 kairos.md ↔ kairosv4.9.0.apk）
+  // 多版本时全部配对（旧版本不再单独出卡片），取版本号最大的作为下载文件
+  const candidates = downloads.filter(
     (f) => !used.has(f) && path.basename(f, path.extname(f)).toLowerCase().startsWith(key.toLowerCase())
   );
-  if (dlFile) used.add(dlFile);
+  let dlFile = null;
+  if (candidates.length) {
+    candidates.forEach((f) => used.add(f));
+    dlFile = candidates
+      .slice()
+      .sort((a, b) => compareVersions(guessVersion(a), guessVersion(b)))
+      .pop();
+  }
 
   const m = meta[key] || meta[key.toLowerCase()] || {};
   const entry = {
@@ -108,7 +126,7 @@ for (const doc of docs) {
     fileSize: dlFile ? humanSize(fs.statSync(path.join(DL_DIR, dlFile)).size) : "",
     updateDate: m.updateDate || "",
     downloadUrl: dlFile ? "downloads/" + encodeURIComponent(dlFile) : "",
-    docUrl: REPO_DOC_BASE + "/" + encodeURIComponent(doc),
+    docUrl: "docs/" + encodeURIComponent(doc),
   };
   projects.push(entry);
 }

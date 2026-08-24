@@ -41,6 +41,18 @@
     </div>
   </footer>
 
+  <!-- 文档弹窗：站内渲染 docs/*.md，不跳转 -->
+  <div class="doc-modal" id="doc-modal" hidden>
+    <div class="doc-backdrop" data-close></div>
+    <div class="doc-panel" role="dialog" aria-modal="true" aria-labelledby="doc-title">
+      <div class="doc-header">
+        <h2 id="doc-title">文档</h2>
+        <button class="doc-close" type="button" data-close aria-label="关闭">✕</button>
+      </div>
+      <div class="doc-content" id="doc-content"></div>
+    </div>
+  </div>
+
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>
