@@ -25,6 +25,20 @@ const PROJECTS = [
     "docUrl": "docs/Carane.md"
   },
   {
+    "id": "CaranePlan",
+    "name": "Kairos 原生 Android 应用框架",
+    "icon": "📦",
+    "version": "",
+    "platform": "",
+    "tagline": "",
+    "description": "***",
+    "tags": [],
+    "fileSize": "",
+    "updateDate": "",
+    "downloadUrl": "",
+    "docUrl": "docs/CaranePlan.md"
+  },
+  {
     "id": "Tempo",
     "name": "Tempo · 输入驱动的黄历",
     "icon": "📅",
@@ -42,25 +56,5 @@ const PROJECTS = [
     "updateDate": "",
     "downloadUrl": "downloads/Tempo.apk",
     "docUrl": "docs/Tempo.md"
-  },
-  {
-    "id": "kairos",
-    "name": "Kairos",
-    "icon": "⏱️",
-    "version": "v4.9.0",
-    "platform": "Android",
-    "tagline": "纯原生 Android 计时与任务管理应用",
-    "description": "采用 Jetpack Compose + Kotlin 原生构建。以 UnifiedTask 统一任务模型为核心，支持计时、树形任务管理、思维导图与甘特图，Room 数据库全库加密，进程被杀或设备重启后计时状态可自动恢复。",
-    "tags": [
-      "计时器",
-      "任务管理",
-      "思维导图",
-      "甘特图",
-      "数据加密"
-    ],
-    "fileSize": "17 MB",
-    "updateDate": "2026-08-17",
-    "downloadUrl": "downloads/kairosv4.9.0.apk",
-    "docUrl": "docs/kairos.md"
   }
 ];

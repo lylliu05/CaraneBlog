@@ -1,14 +1,5 @@
 {
   "apps": {
-    "com.anoneapk.timer": {
-      "versionCode": 490,
-      "versionName": "4.9.0",
-      "updateLog": "",
-      "forceUpdate": false,
-      "apkUrl": "https://lylliu05.github.io/CaraneBlog/downloads/kairosv4.9.0.apk",
-      "fileSize": "17 MB",
-      "minSupportVersion": 0
-    },
     "com.carane.app": {
       "versionCode": 1,
       "versionName": "1.0",
@@ -16,6 +7,15 @@
       "forceUpdate": false,
       "apkUrl": "https://lylliu05.github.io/CaraneBlog/downloads/Caranev1.0.0.apk",
       "fileSize": "3.6 MB",
+      "minSupportVersion": 0
+    },
+    "com.caraneplan.app": {
+      "versionCode": 1,
+      "versionName": "0.1.1",
+      "updateLog": "",
+      "forceUpdate": false,
+      "apkUrl": "https://lylliu05.github.io/CaraneBlog/downloads/CaranePlanv0.1.1.apk",
+      "fileSize": "17 MB",
       "minSupportVersion": 0
     },
     "com.tempo.app": {
