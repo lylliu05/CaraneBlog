@@ -41,6 +41,17 @@ function guessPlatform(file) {
   return "";
 }
 
+/** 判断下载文件是否属于 key 项目：key 后必须紧跟结尾、版本号或分隔符，
+ *  避免 "Carane" 误配 "CaranePlanv0.1.1.apk" 这类前缀包含关系 */
+function isPairOf(key, file) {
+  const base = path.basename(file, path.extname(file));
+  const re = new RegExp(
+    "^" + key.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "(?=$|v?\\d|[._\\- ])",
+    "i"
+  );
+  return re.test(base);
+}
+
 /** 从文件名提取版本号，如 "Caranev1.0.0.apk" → "v1.0.0"；没有则返回 "" */
 function guessVersion(fileName) {
   const m = path.basename(fileName, path.extname(fileName)).match(/v?\d+\.\d+(\.\d+)*/i);
@@ -99,11 +110,9 @@ for (const doc of docs) {
   const key = path.basename(doc, ".md");
   const parsed = parseMarkdown(path.join(DOCS_DIR, doc));
 
-  // 在 downloads 中找配对文件：文件名以 key 开头（如 kairos.md ↔ kairosv4.9.0.apk）
+  // 在 downloads 中找配对文件：文件名以 key 开头且 key 后紧跟边界（如 kairos.md ↔ kairosv4.9.0.apk）
   // 多版本时全部配对（旧版本不再单独出卡片），取版本号最大的作为下载文件
-  const candidates = downloads.filter(
-    (f) => !used.has(f) && path.basename(f, path.extname(f)).toLowerCase().startsWith(key.toLowerCase())
-  );
+  const candidates = downloads.filter((f) => !used.has(f) && isPairOf(key, f));
   let dlFile = null;
   if (candidates.length) {
     candidates.forEach((f) => used.add(f));
