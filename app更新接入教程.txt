@@ -1,0 +1,154 @@
+app更新检查接入方案
+App 端接入（每个 App 复制同一个文件即可）
+因为 apps.json 以包名为 key，所有 App 用同一个 URL、同一份代码，零改动。
+
+1. 新建 AppUpdate.kt（完整实现，直接复制）
+
+Kotlin
+
+import android.app.Activity
+import android.app.AlertDialog
+import android.app.DownloadManager
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.net.Uri
+import android.os.Build
+import android.os.Environment
+import android.provider.Settings
+import androidx.core.content.FileProvider
+import org.json.JSONObject
+import java.io.File
+import java.net.HttpURLConnection
+import java.net.URL
+import kotlin.concurrent.thread
+
+object AppUpdate {
+
+    // 所有 App 共用同一地址，按 packageName 自动区分
+    private const val UPDATE_URL = "https://lylliu05.github.io/CaraneBlog/apps.json"
+
+    /** 在 MainActivity.onCreate 或「检查更新」按钮中调用 */
+    fun check(activity: Activity) {
+        thread {
+            val data = try {
+                // 时间戳参数避免 CDN 缓存
+                val conn = URL("$UPDATE_URL?t=${System.currentTimeMillis()}")
+                    .openConnection() as HttpURLConnection
+                conn.connectTimeout = 10_000
+                conn.readTimeout = 10_000
+                val text = conn.inputStream.bufferedReader().use { it.readText() }
+                conn.disconnect()
+                JSONObject(text).getJSONObject("apps").getJSONObject(activity.packageName)
+            } catch (e: Exception) {
+                null // 网络失败或没有该包名的配置：静默跳过
+            } ?: return@thread
+
+            val remoteCode = data.optLong("versionCode", 0)
+            val currentCode = if (Build.VERSION.SDK_INT >= 28)
+                activity.packageManager.getPackageInfo(activity.packageName, 0).longVersionCode
+            else
+                @Suppress("DEPRECATION")
+                activity.packageManager.getPackageInfo(activity.packageName, 0).versionCode.toLong()
+
+            if (remoteCode > currentCode) {
+                // forceUpdate 为 true，或当前版本低于 minSupportVersion → 强制更新
+                val force = data.optBoolean("forceUpdate") ||
+                    currentCode < data.optLong("minSupportVersion", 0)
+                activity.runOnUiThread { showUpdateDialog(activity, data, force) }
+            }
+        }
+    }
+
+    private fun showUpdateDialog(activity: Activity, data: JSONObject, force: Boolean) {
+        val builder = AlertDialog.Builder(activity)
+            .setTitle("发现新版本 ${data.optString("versionName")}")
+            .setMessage("更新内容：\n${data.optString("updateLog").ifEmpty { "优化体验，修复已知问题" }}")
+            .setPositiveButton("立即更新") { _, _ -> download(activity, data.optString("apkUrl")) }
+        if (!force) builder.setNegativeButton("稍后", null)
+        val dialog = builder.create()
+        dialog.setCancelable(!force) // 强制更新时点返回键/外部区域均不可关闭
+        dialog.show()
+    }
+
+    private fun download(activity: Activity, apkUrl: String) {
+        // Android 8+：先引导开启「安装未知应用」权限，授权后回来再点一次立即更新
+        if (Build.VERSION.SDK_INT >= 26 && !activity.packageManager.canRequestPackageInstalls()) {
+            activity.startActivity(
+                Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES,
+                    Uri.parse("package:${activity.packageName}"))
+            )
+            return
+        }
+
+        val request = DownloadManager.Request(Uri.parse(apkUrl))
+            .setTitle("正在下载新版本")
+            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+            .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "app_update.apk")
+        val dm = activity.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+        val id = dm.enqueue(request)
+
+        activity.registerReceiver(object : BroadcastReceiver() {
+            override fun onReceive(ctx: Context, intent: Intent) {
+                if (intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1) != id) return
+                ctx.unregisterReceiver(this)
+                dm.getUriForDownloadedFile(id)?.let { install(ctx, it) }
+            }
+        }, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
+    }
+
+    private fun install(context: Context, uri: Uri) {
+        // DownloadManager 对公共下载目录返回 file:// URI，Android 7+ 必须经 FileProvider 转换
+        val installUri = if (uri.scheme == "file") {
+            FileProvider.getUriForFile(
+                context, "${context.packageName}.fileprovider", File(uri.path!!)
+            )
+        } else uri
+
+        context.startActivity(Intent(Intent.ACTION_VIEW).apply {
+            setDataAndType(installUri, "application/vnd.android.package-archive")
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_ACTIVITY_NEW_TASK)
+        })
+    }
+}
+2. AndroidManifest.xml 添加
+
+XML
+
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+
+<application ...>
+    <provider
+        android:name="androidx.core.content.FileProvider"
+        android:authorities="${applicationId}.fileprovider"
+        android:exported="false"
+        android:grantUriPermissions="true">
+        <meta-data
+            android:name="android.support.FILE_PROVIDER_PATHS"
+            android:resource="@xml/file_paths" />
+    </provider>
+</application>
+3. 新建 res/xml/file_paths.xml
+
+XML
+
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <external-path name="downloads" path="Download/" />
+</paths>
+4. 调用
+
+Kotlin
+
+// 启动时静默检查（MainActivity.onCreate）
+AppUpdate.check(this)
+
+// 或设置页「检查更新」按钮
+btnCheckUpdate.setOnClickListener { AppUpdate.check(this) }
+注意事项
+每次发版 versionCode 必须递增（build.gradle 里的 versionCode），这是触发更新提示的唯一依据
+push APK 后约 1~2 分钟生效（Actions 运行 + Pages 部署），?t= 参数已避免 CDN 缓存
+下载走系统 DownloadManager（有通知栏进度、断点续传），比直接浏览器打开 APK 链接可靠
+若配置了 updateLog（scripts/update-config.json），更新弹窗会展示；没配置则显示默认文案
