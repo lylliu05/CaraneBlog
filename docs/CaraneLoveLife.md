@@ -1,4 +1,4 @@
-# 卡烷恋 CaraneLoveLife
+# 爱日常 CaraneLoveLife
 
 情侣互动 Android 应用:恋爱天数、纪念日倒计时、共同愿望清单与甜甜日记,纯本地存储。
 
