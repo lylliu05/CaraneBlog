@@ -25,10 +25,24 @@ const PROJECTS = [
     "docUrl": "docs/Carane.md"
   },
   {
+    "id": "CaraneLoveLife",
+    "name": "卡烷恋 CaraneLoveLife",
+    "icon": "📦",
+    "version": "",
+    "platform": "Android",
+    "tagline": "",
+    "description": "情侣互动 Android 应用:恋爱天数、纪念日倒计时、共同愿望清单与甜甜日记,纯本地存储。",
+    "tags": [],
+    "fileSize": "3.5 MB",
+    "updateDate": "",
+    "downloadUrl": "downloads/CaraneLoveLife.apk",
+    "docUrl": "docs/CaraneLoveLife.md"
+  },
+  {
     "id": "CaranePlan",
     "name": "CaranePlan",
     "icon": "⏱️",
-    "version": "v0.1.2",
+    "version": "v0.1.3",
     "platform": "Android",
     "tagline": "纯原生 Android 计时与任务管理应用",
     "description": "采用 Jetpack Compose + Kotlin 原生构建。以 UnifiedTask 统一任务模型为核心，支持计时、树形任务管理、思维导图与甘特图，Room 数据库全库加密，进程被杀或设备重启后计时状态可自动恢复。",
@@ -41,7 +55,7 @@ const PROJECTS = [
     ],
     "fileSize": "17 MB",
     "updateDate": "2026-08-28",
-    "downloadUrl": "downloads/CaranePlanv0.1.2.apk",
+    "downloadUrl": "downloads/CaranePlanv0.1.3.apk",
     "docUrl": "docs/CaranePlan.md"
   },
   {

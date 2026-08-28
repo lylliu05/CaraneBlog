@@ -9,12 +9,21 @@
       "fileSize": "3.6 MB",
       "minSupportVersion": 0
     },
-    "com.caraneplan.app": {
-      "versionCode": 2,
-      "versionName": "0.1.2",
+    "com.caranelovelife": {
+      "versionCode": 1,
+      "versionName": "1.0.0",
       "updateLog": "",
       "forceUpdate": false,
-      "apkUrl": "https://lylliu05.github.io/CaraneBlog/downloads/CaranePlanv0.1.2.apk",
+      "apkUrl": "https://lylliu05.github.io/CaraneBlog/downloads/CaraneLoveLife.apk",
+      "fileSize": "3.5 MB",
+      "minSupportVersion": 0
+    },
+    "com.caraneplan.app": {
+      "versionCode": 3,
+      "versionName": "0.1.3",
+      "updateLog": "",
+      "forceUpdate": false,
+      "apkUrl": "https://lylliu05.github.io/CaraneBlog/downloads/CaranePlanv0.1.3.apk",
       "fileSize": "17 MB",
       "minSupportVersion": 0
     },
