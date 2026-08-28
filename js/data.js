@@ -28,14 +28,14 @@ const PROJECTS = [
     "id": "CaraneLoveLife",
     "name": "卡烷恋 CaraneLoveLife",
     "icon": "📦",
-    "version": "v0.1.1",
+    "version": "v0.1.2",
     "platform": "Android",
     "tagline": "",
     "description": "情侣互动 Android 应用:恋爱天数、纪念日倒计时、共同愿望清单与甜甜日记,纯本地存储。",
     "tags": [],
     "fileSize": "3.5 MB",
     "updateDate": "",
-    "downloadUrl": "downloads/CaraneLoveLifev0.1.1.apk",
+    "downloadUrl": "downloads/CaraneLoveLifev0.1.2.apk",
     "docUrl": "docs/CaraneLoveLife.md"
   },
   {
