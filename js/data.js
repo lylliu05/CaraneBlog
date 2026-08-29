@@ -28,14 +28,14 @@ const PROJECTS = [
     "id": "CaraneLoveLife",
     "name": "爱日常 CaraneLoveLife",
     "icon": "📦",
-    "version": "v0.1.3",
+    "version": "v0.1.4",
     "platform": "Android",
     "tagline": "",
-    "description": "情侣互动 Android 应用:恋爱天数、纪念日倒计时、共同愿望清单与甜甜日记,纯本地存储。",
+    "description": "一款**日常记录类** Android 应用，把生活的琐碎与心动都收进一个 App：**日记记录、账单汇总**是核心双引擎，同时贴心内置**经期**记录与**恋爱/暗恋**专属空间。纯本地存储，数据不上云，安心记录每一天。",
     "tags": [],
-    "fileSize": "3.5 MB",
+    "fileSize": "4.4 MB",
     "updateDate": "",
-    "downloadUrl": "downloads/CaraneLoveLifev0.1.3.apk",
+    "downloadUrl": "downloads/CaraneLoveLifev0.1.4.apk",
     "docUrl": "docs/CaraneLoveLife.md"
   },
   {
