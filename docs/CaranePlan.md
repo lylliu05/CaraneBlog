@@ -1,6 +1,7 @@
-# Kairos 原生 Android 应用框架
 
-> 版本：v4.9.0 | 日期：2026-08-17
+# CaranePlan（卡烷计划）
+
+> 版本：v0.1.6 | 日期：2026-08-30
 >
 > 纯原生 Android 计时与任务管理应用，采用 Jetpack Compose + Kotlin 原生技术栈从零构建。
 
@@ -25,7 +26,7 @@
 
 ## 1. 项目概述
 
-Kairos 是一个**纯原生 Android 计时与任务管理应用**，在技术实现上完全采用 Android 原生生态：
+CaranePlan（卡烷计划）是一个**纯原生 Android 计时与任务管理应用**，在技术实现上完全采用 Android 原生生态：
 
 - **UI 层**：Jetpack Compose 声明式 UI
 - **数据层**：Room 本地数据库 + SQLCipher 全库加密
@@ -45,10 +46,10 @@ Kairos 是一个**纯原生 Android 计时与任务管理应用**，在技术实
 
 | 工具                | 版本要求                    | 用途                   |
 | ----------------- | ----------------------- | -------------------- |
-| JDK               | 17+                     | Kotlin 编译与 Gradle 运行 |
+| JDK               | 23（位于 D:/Androidstudio/JDK） | Kotlin 编译与 Gradle 运行 |
 | Android Studio    | Hedgehog (2023.1.1) 或更高 | IDE 与调试              |
 | Android SDK       | compileSdk 35 / minSdk 24 | 编译目标与最低支持            |
-| Gradle            | 8.9（由 wrapper 自动下载）      | 构建工具                 |
+| Gradle            | 8.12（由 wrapper 自动下载）      | 构建工具                 |
 | Kotlin            | 2.0.21                  | 主语言                  |
 | KSP               | 2.0.21-1.0.28（KSP1 模式）  | 注解处理                 |
 
@@ -56,7 +57,7 @@ Kairos 是一个**纯原生 Android 计时与任务管理应用**，在技术实
 
 ```bash
 # 1. 克隆或解压项目后进入根目录
-cd kairos_apk
+cd CaranePlan
 
 # 2. 复制本地 SDK 路径模板
 copy local.properties.sample local.properties
@@ -98,7 +99,7 @@ adb install app/build/outputs/apk/debug/app-debug.apk
 
 ### 2.5 Android Studio 构建
 
-1. File → Open → 选择 `kairos_apk/` 根目录
+1. File → Open → 选择 `CaranePlan/` 根目录
 2. 等待 Gradle Sync 完成
 3. Build → Build APK(s) 或 Build → Generate Signed Bundle / APK
 
@@ -389,11 +390,11 @@ android {
     namespace = "com.anoneapk.timer"
     compileSdk = 35
     defaultConfig {
-        applicationId = "com.anoneapk.timer"
+        applicationId = "com.caraneplan.app"
         minSdk = 24
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = 6
+        versionName = "0.1.6"
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -523,7 +524,7 @@ STOPWATCH：remaining = elapsedSec（已用秒数）
 | 语言     | Kotlin                      | 2.0.21          | Android 官方首选语言，协程 + Flow 异步模型      |
 | UI 框架  | Jetpack Compose             | BOM 2024.12.01  | 声明式 UI，编译期类型安全，免去 XML findViewById |
 | 构建     | Android Gradle Plugin       | 8.7.3           | 支持 KSP、配置缓存                        |
-| Gradle | Gradle                      | 8.9             | 配合 AGP 8.x，启用配置缓存                  |
+| Gradle | Gradle                      | 8.12            | 配合 AGP 8.x，启用配置缓存                  |
 | 注解处理   | KSP                         | 2.0.21-1.0.28   | KSP1 模式（KSP2 有 Unit 返回类型 bug）       |
 | 依赖注入   | Hilt                        | 2.52            | 基于 Dagger，编译期生成，Android 官方推荐       |
 | 数据库    | Room                        | 2.6.1           | 编译期 SQL 校验，自动生成实现，支持 Flow          |
@@ -617,14 +618,16 @@ UnifiedTaskDao 更新 unified_tasks 表
 ## 9. 完整项目结构
 
 ```
-kairos_apk/                                 # 项目根目录
-├── settings.gradle.kts                     # 项目设置，仅包含 :app
+CaranePlan/                                 # 项目根目录
+├── settings.gradle.kts                     # 项目设置，rootProject.name = "CaranePlan"，仅包含 :app
 ├── build.gradle.kts                        # 顶层构建文件
-├── gradle.properties                       # Gradle 全局配置（ksp.useKSP2=false）
+├── gradle.properties                       # Gradle 全局配置（ksp.useKSP2=false、JDK 23 路径等）
 ├── local.properties.sample                 # 本地 SDK 路径示例
 ├── keystore.properties                     # Release 签名配置（不提交版本库）
+├── anone_release.jks                       # Release 签名密钥
 ├── .gitignore                              # 顶层忽略规则
 ├── README.md                               # 本文档
+├── 必看.txt                                  # 编译与版本更新备忘
 │
 ├── gradle/
 │   ├── libs.versions.toml                  # Version Catalog（统一依赖版本）
@@ -632,7 +635,7 @@ kairos_apk/                                 # 项目根目录
 │       └── gradle-wrapper.properties        # Gradle 版本配置
 │
 └── app/                                    # 唯一应用模块
-    ├── build.gradle.kts                    # 模块构建配置
+    ├── build.gradle.kts                    # 模块构建配置（applicationId = com.caraneplan.app）
     ├── proguard-rules.pro                  # R8 混淆规则
     ├── schemas/                            # Room schema JSON 导出目录
     ├── .gitignore                          # 模块忽略规则
@@ -642,7 +645,7 @@ kairos_apk/                                 # 项目根目录
         │
         ├── res/                            # 资源目录
         │   ├── values/
-        │   │   ├── strings.xml            # 字符串资源
+        │   │   ├── strings.xml            # 字符串资源（app_name = "卡烷计划"）
         │   │   ├── colors.xml              # 颜色资源
         │   │   └── themes.xml              # 主题资源
         │   ├── drawable/                   # 矢量图标
@@ -650,7 +653,7 @@ kairos_apk/                                 # 项目根目录
         │   └── xml/
         │       └── file_paths.xml         # FileProvider 路径
         │
-        └── java/com/anoneapk/timer/        # 源码根包
+        └── java/com/anoneapk/timer/        # 源码根包（namespace 保留旧名，与 applicationId 解耦）
             ├── AnoneApp.kt                 # Application 入口
             │
             ├── data/                       # Data 层
@@ -669,25 +672,25 @@ kairos_apk/                                 # 项目根目录
             │   │   │   ├── Converters.kt              # Room TypeConverters
             │   │   │   └── UnifiedTaskMapper.kt       # Entity ↔ Domain 映射
             │   │   ├── migration/          # 数据库迁移（v4→v22）
-                │   │   │   ├── Migration4To5.kt            # v4→v5 新增 timer_session 表
-                │   │   │   ├── Migration5To6.kt            # v5→v6 tasks 新增 links 字段
-                │   │   │   ├── Migration6To7.kt            # v6→v7 plans 新增 planDate 字段
-                │   │   │   ├── Migration7To8.kt            # v7→v8 补建 planDate 索引
-                │   │   │   ├── Migration8To9.kt            # v8→v9 合并为 unified_tasks
-                │   │   │   ├── Migration9To10.kt           # v9→v10 删除 endDate 列
-                │   │   │   ├── Migration10To11.kt          # v10→v11 新增软删除字段
-                │   │   │   ├── Migration11To12.kt          # v11→v12 新增 timer_history 表
-                │   │   │   ├── Migration12To13.kt          # v12→v13 新增 mode 字段
-                │   │   │   ├── Migration13To14.kt          # v13→v14 新增 elapsedSeconds
-                │   │   │   ├── Migration14To15.kt          # v14→v15 新增提升快照字段
-                │   │   │   ├── Migration15To16.kt          # v15→v16 新增重复任务字段
-                │   │   │   ├── Migration16To17.kt          # v16→v17 新增重复频率字段
-                │   │   │   ├── Migration17To18.kt          # v17→v18 新增 app_category + app_usage_record 表
-                │   │   │   ├── Migration18To19.kt          # v18→v19 新增 task_image 表
-                │   │   │   ├── Migration19To20.kt          # v19→v20 新增 planParentId 字段与索引
-                │   │   │   ├── Migration20To21.kt          # v20→v21 删除 links 列（重建表）
-                │   │   │   └── Migration21To22.kt          # v21→v22 新增 goalMetric/goalTargetValue/goalLinkedTaskId
-                │   │   └── AnoneDatabase.kt    # Room Database (v22)
+            │   │   │   ├── Migration4To5.kt            # v4→v5 新增 timer_session 表
+            │   │   │   ├── Migration5To6.kt            # v5→v6 tasks 新增 links 字段
+            │   │   │   ├── Migration6To7.kt            # v6→v7 plans 新增 planDate 字段
+            │   │   │   ├── Migration7To8.kt            # v7→v8 补建 planDate 索引
+            │   │   │   ├── Migration8To9.kt            # v8→v9 合并为 unified_tasks
+            │   │   │   ├── Migration9To10.kt           # v9→v10 删除 endDate 列
+            │   │   │   ├── Migration10To11.kt          # v10→v11 新增软删除字段
+            │   │   │   ├── Migration11To12.kt          # v11→v12 新增 timer_history 表
+            │   │   │   ├── Migration12To13.kt          # v12→v13 新增 mode 字段
+            │   │   │   ├── Migration13To14.kt          # v13→v14 新增 elapsedSeconds
+            │   │   │   ├── Migration14To15.kt          # v14→v15 新增提升快照字段
+            │   │   │   ├── Migration15To16.kt          # v15→v16 新增重复任务字段
+            │   │   │   ├── Migration16To17.kt          # v16→v17 新增重复频率字段
+            │   │   │   ├── Migration17To18.kt          # v17→v18 新增 app_category + app_usage_record 表
+            │   │   │   ├── Migration18To19.kt          # v18→v19 新增 task_image 表
+            │   │   │   ├── Migration19To20.kt          # v19→v20 新增 planParentId 字段与索引
+            │   │   │   ├── Migration20To21.kt          # v20→v21 删除 links 列（重建表）
+            │   │   │   └── Migration21To22.kt          # v21→v22 新增 goalMetric/goalTargetValue/goalLinkedTaskId
+            │   │   └── AnoneDatabase.kt    # Room Database (v22)
             │   ├── datastore/              # 偏好存储
             │   │   ├── UserPreferences.kt  # DataStore 会话状态与用户偏好（含 current_mode、memo_backend、memo_vault_uri）
             │   │   └── WidgetTemplateStore.kt # 桌面小组件预设模板持久化
@@ -746,7 +749,7 @@ kairos_apk/                                 # 项目根目录
             │   ├── MainActivity.kt        # 单 Activity 入口（含通知权限请求）
             │   ├── theme/                 # Compose 主题
             │   │   ├── Color.kt
-            │   │   └── KairosTheme.kt
+            │   │   └── KairosTheme.kt     # 主题 Composable（函数名保留旧称，待重命名）
             │   ├── navigation/            # 导航
             │   │   ├── Destinations.kt    # 路由常量（含 13 个目的地）
             │   │   ├── AnoneNavHost.kt    # NavHost（含底部导航栏集成）
@@ -1335,6 +1338,8 @@ ACTION_STOP_ALERTS 广播
 | v4.8.5 环境标签合理值双模式 | 新增 `LabelQuota`（mode + value）数据模型与 `LabelQuotaMode`（PERCENTAGE / WEEKLY_COUNT）枚举（`domain/model/LabelQuota.kt`）；`UserPreferences` 用 `labelQuotaFlow`/`saveLabelQuotas`/`resetLabelQuotas`/`DEFAULT_LABEL_QUOTAS` 替代原 `labelRatioFlow` 系列（DataStore key 从 `label_ratio` 改为 `label_quota`），默认值中社交从 4% 改为每周固定 2 个（WEEKLY_COUNT 模式），其余标签保持百分比模式；`DashboardViewModel`/`HistoryReportViewModel` 转发 `labelQuotas`；`AccountSettingsScreen` 原 `LabelRatioEditDialog` 重构为 `LabelQuotaEditDialog`，每个标签可用 `FilterChip` 切换"百分比/每周"模式并输入对应数值，底部仅统计百分比模式合计；`EnvironmentTagDetailDialog` 支持双模式：PERCENTAGE 沿用今日占比逻辑，WEEKLY_COUNT 显示"本周 X/N 个"并按本周一到今天累计（新增 `calcWeekDaysElapsed` 函数）计算状态（本周还需 / 超额 / 已达标） | ✅  |
 | v4.8.6 归档/回收站甘特图化 | 归档页与回收站页改用甘特图页面模板（新增 `ArchiveTrashGanttTemplate.kt`）：归档页按 `completedAt` 定位任务条、回收站页按 `deletedAt` 定位（新增 `GanttItemBuilder.kt`，支持自定义 `dateExtractor` 构建单日锚点甘特条）；`GanttChart` / `GanttTaskBar` / `GanttDetailSheet` 的拖拽回调改为可空（`onTaskDragEnd` / `onDragEnd` 为 null 时禁用拖拽，归档/回收只读）；移除两页的 FAB 新建按钮，保留顶栏"清空"操作；详情弹窗复用 `GanttDetailSheet`，新增 `onReactivate`（归档页"重新激活"按钮）与 `onRestore`（回收站页"恢复"按钮）可选回调；回收站永久删除带二次确认弹窗；`CompletedViewModel` / `TrashViewModel` 重写为基于 `observeCompletedTasks` / `observeTrashedTasks` + 月份锚点 + 折叠状态生成甘特任务条列表 | ✅ |
 | v4.9.0 思维导图图谱视图 | 思维导图新增 Obsidian Graph 风格图谱视图并支持双视图切换：`ForceGraphCanvas.kt` 实现径向树布局（`GraphRadialSim`，子任务按叶节点比例瓜分父节点角度扇区、逐层向外、连线零交叉，节点半径随子孙数增长 7→15dp，环间距 80dp，动画平滑过渡）；`MindMapScreen.kt` 顶栏新增"树形/图谱"视图切换，长按节点折叠子树在两种视图下通用 | ✅ |
+
+> **版本号说明**：上述版本号沿用项目早期内部阶段标记。当前发布版本为 **v0.1.6**（`versionCode = 6`），`applicationId = "com.caraneplan.app"`，品牌名 **CaranePlan（卡烷计划）**。代码包名 `com.anoneapk.timer` 为历史遗留，与 `applicationId` 解耦，不影响应用身份。
 
 ### 11.2 未来扩展
 
