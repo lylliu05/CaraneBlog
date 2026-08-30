@@ -22,7 +22,7 @@ const PROJECTS = [
     "id": "CaranePlan",
     "name": "CaranePlan",
     "icon": "⏱️",
-    "version": "v0.1.5",
+    "version": "v0.1.7",
     "platform": "Android",
     "tagline": "纯原生 Android 计时与任务管理应用",
     "description": "采用 Jetpack Compose + Kotlin 原生构建。以 UnifiedTask 统一任务模型为核心，支持计时、树形任务管理、思维导图与甘特图，Room 数据库全库加密，进程被杀或设备重启后计时状态可自动恢复。",
@@ -35,7 +35,7 @@ const PROJECTS = [
     ],
     "fileSize": "17 MB",
     "updateDate": "2026-08-28",
-    "downloadUrl": "downloads/CaranePlanv0.1.5.apk",
+    "downloadUrl": "downloads/CaranePlanv0.1.7.apk",
     "docUrl": "docs/CaranePlan.md"
   },
   {
@@ -72,17 +72,17 @@ const PROJECTS = [
     "docUrl": "docs/Tempo.md"
   },
   {
-    "id": "Caranev1.0.0",
-    "name": "Carane",
+    "id": "CaraneVideov0.1.2",
+    "name": "CaraneVideo",
     "icon": "📦",
-    "version": "v1.0.0",
+    "version": "v0.1.2",
     "platform": "Android",
     "tagline": "",
     "description": "",
     "tags": [],
-    "fileSize": "3.6 MB",
+    "fileSize": "3.5 MB",
     "updateDate": "",
-    "downloadUrl": "downloads/Caranev1.0.0.apk",
+    "downloadUrl": "downloads/CaraneVideov0.1.2.apk",
     "docUrl": ""
   }
 ];

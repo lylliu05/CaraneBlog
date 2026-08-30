@@ -1,14 +1,5 @@
 {
   "apps": {
-    "com.carane.app": {
-      "versionCode": 1,
-      "versionName": "1.0",
-      "updateLog": "",
-      "forceUpdate": false,
-      "apkUrl": "https://lylliu05.github.io/CaraneBlog/downloads/Caranev1.0.0.apk",
-      "fileSize": "3.6 MB",
-      "minSupportVersion": 0
-    },
     "com.caranelovelife": {
       "versionCode": 4,
       "versionName": "0.1.4",
@@ -19,11 +10,11 @@
       "minSupportVersion": 0
     },
     "com.caraneplan.app": {
-      "versionCode": 5,
-      "versionName": "0.1.5",
+      "versionCode": 7,
+      "versionName": "0.1.7",
       "updateLog": "",
       "forceUpdate": false,
-      "apkUrl": "https://lylliu05.github.io/CaraneBlog/downloads/CaranePlanv0.1.5.apk",
+      "apkUrl": "https://lylliu05.github.io/CaraneBlog/downloads/CaranePlanv0.1.7.apk",
       "fileSize": "17 MB",
       "minSupportVersion": 0
     },
