@@ -1,4 +1,4 @@
-# CaraneVideov0.1.1
+# CaraneVideo
 
 一个基于 Android 原生开发的多格式视频播放器。
 
