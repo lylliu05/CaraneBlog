@@ -5,26 +5,6 @@
  */
 const PROJECTS = [
   {
-    "id": "Carane",
-    "name": "卡烷 Carane",
-    "icon": "🎬",
-    "version": "v1.0.0",
-    "platform": "Android",
-    "tagline": "多格式视频播放器",
-    "description": "一个基于 Android 原生开发的多格式视频播放器。",
-    "tags": [
-      "视频播放",
-      "HLS/DASH",
-      "直播流",
-      "画中画",
-      "离线下载"
-    ],
-    "fileSize": "3.6 MB",
-    "updateDate": "",
-    "downloadUrl": "downloads/Caranev1.0.0.apk",
-    "docUrl": "docs/Carane.md"
-  },
-  {
     "id": "CaraneLoveLife",
     "name": "爱日常 CaraneLoveLife",
     "icon": "📦",
@@ -59,6 +39,20 @@ const PROJECTS = [
     "docUrl": "docs/CaranePlan.md"
   },
   {
+    "id": "CaraneVideov0.1.1",
+    "name": "CaraneVideov0.1.1",
+    "icon": "📦",
+    "version": "v0.1.1",
+    "platform": "Android",
+    "tagline": "",
+    "description": "一个基于 Android 原生开发的多格式视频播放器。",
+    "tags": [],
+    "fileSize": "3.6 MB",
+    "updateDate": "",
+    "downloadUrl": "downloads/CaraneVideov0.1.1.apk",
+    "docUrl": "docs/CaraneVideov0.1.1.md"
+  },
+  {
     "id": "Tempo",
     "name": "Tempo · 输入驱动的黄历",
     "icon": "📅",
@@ -76,5 +70,19 @@ const PROJECTS = [
     "updateDate": "",
     "downloadUrl": "downloads/Tempo.apk",
     "docUrl": "docs/Tempo.md"
+  },
+  {
+    "id": "Caranev1.0.0",
+    "name": "Carane",
+    "icon": "📦",
+    "version": "v1.0.0",
+    "platform": "Android",
+    "tagline": "",
+    "description": "",
+    "tags": [],
+    "fileSize": "3.6 MB",
+    "updateDate": "",
+    "downloadUrl": "downloads/Caranev1.0.0.apk",
+    "docUrl": ""
   }
 ];

@@ -27,6 +27,15 @@
       "fileSize": "17 MB",
       "minSupportVersion": 0
     },
+    "com.caranevideo.app": {
+      "versionCode": 1,
+      "versionName": "0.1.1",
+      "updateLog": "",
+      "forceUpdate": false,
+      "apkUrl": "https://lylliu05.github.io/CaraneBlog/downloads/CaraneVideov0.1.1.apk",
+      "fileSize": "3.6 MB",
+      "minSupportVersion": 0
+    },
     "com.tempo.app": {
       "versionCode": 1,
       "versionName": "1.0.0",
