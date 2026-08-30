@@ -4,14 +4,6 @@
 
 **在线访问**：<https://lylliu05.github.io/CaraneBlog/>
 
-## 项目列表
-
-| 项目 | 平台 | 版本 | 说明 | 下载 |
-| --- | --- | --- | --- | --- |
-| [卡烷 Carane](docs/Carane.md) | Android | v1.0.0 | 多格式视频播放器（HLS/DASH/RTSP/本地） | [APK 3.6MB](downloads/Caranev1.0.0.apk) |
-| [Kairos](docs/kairos.md) | Android | v4.9.0 | 纯原生计时与任务管理应用（Jetpack Compose + Kotlin） | [APK 17MB](downloads/kairosv4.9.0.apk) |
-| [Tempo](docs/Tempo.md) | Android | - | 输入驱动的黄历（天时+地利+人事） | [APK 10.3MB](downloads/Tempo.apk) |
-
 ## 目录结构
 
 ```
