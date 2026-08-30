@@ -6,7 +6,7 @@
 const PROJECTS = [
   {
     "id": "CaraneLoveLife",
-    "name": "爱日常 CaraneLoveLife",
+    "name": "CaraneLoveLife",
     "icon": "📦",
     "version": "v0.1.4",
     "platform": "Android",
@@ -40,7 +40,7 @@ const PROJECTS = [
   },
   {
     "id": "CaraneVideov0.1.1",
-    "name": "CaraneVideov0.1.1",
+    "name": "CaraneVideo",
     "icon": "📦",
     "version": "v0.1.1",
     "platform": "Android",
@@ -54,7 +54,7 @@ const PROJECTS = [
   },
   {
     "id": "Tempo",
-    "name": "Tempo · 输入驱动的黄历",
+    "name": "Tempo · 黄历",
     "icon": "📅",
     "version": "",
     "platform": "Android",
