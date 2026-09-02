@@ -84,5 +84,33 @@ const PROJECTS = [
     "updateDate": "",
     "downloadUrl": "downloads/CaraneVideov0.1.2.apk",
     "docUrl": ""
+  },
+  {
+    "id": "base",
+    "name": "base",
+    "icon": "📦",
+    "version": "",
+    "platform": "Android",
+    "tagline": "",
+    "description": "",
+    "tags": [],
+    "fileSize": "6.1 MB",
+    "updateDate": "",
+    "downloadUrl": "downloads/base.apk",
+    "docUrl": ""
+  },
+  {
+    "id": "base2",
+    "name": "base2",
+    "icon": "📦",
+    "version": "",
+    "platform": "Android",
+    "tagline": "",
+    "description": "",
+    "tags": [],
+    "fileSize": "25 MB",
+    "updateDate": "",
+    "downloadUrl": "downloads/base2.apk",
+    "docUrl": ""
   }
 ];
