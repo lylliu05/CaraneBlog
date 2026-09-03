@@ -42,14 +42,14 @@ const PROJECTS = [
     "id": "CaraneVideo",
     "name": "CaraneVideo",
     "icon": "📦",
-    "version": "v0.1.3",
+    "version": "v0.1.4",
     "platform": "Android",
     "tagline": "",
     "description": "一个基于 Android 原生开发的多格式视频播放器。",
     "tags": [],
     "fileSize": "64 MB",
     "updateDate": "",
-    "downloadUrl": "downloads/CaraneVideov0.1.3.apk",
+    "downloadUrl": "downloads/CaraneVideov0.1.4.apk",
     "docUrl": "docs/CaraneVideo.md"
   },
   {
