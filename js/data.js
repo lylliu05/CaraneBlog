@@ -16,7 +16,8 @@ const PROJECTS = [
     "fileSize": "4.5 MB",
     "updateDate": "",
     "downloadUrl": "downloads/CaraneLoveLifev0.1.6.apk",
-    "docUrl": "docs/CaraneLoveLife.md"
+    "docUrl": "docs/CaraneLoveLife.md",
+    "link": ""
   },
   {
     "id": "CaranePlan",
@@ -36,7 +37,8 @@ const PROJECTS = [
     "fileSize": "17 MB",
     "updateDate": "2026-08-28",
     "downloadUrl": "downloads/CaranePlanv0.1.9.apk",
-    "docUrl": "docs/CaranePlan.md"
+    "docUrl": "docs/CaranePlan.md",
+    "link": ""
   },
   {
     "id": "CaraneVideo",
@@ -50,7 +52,8 @@ const PROJECTS = [
     "fileSize": "64 MB",
     "updateDate": "",
     "downloadUrl": "downloads/CaraneVideov0.1.4.apk",
-    "docUrl": "docs/CaraneVideo.md"
+    "docUrl": "docs/CaraneVideo.md",
+    "link": ""
   },
   {
     "id": "Tempo",
@@ -69,7 +72,8 @@ const PROJECTS = [
     "fileSize": "10 MB",
     "updateDate": "",
     "downloadUrl": "downloads/Tempo.apk",
-    "docUrl": "docs/Tempo.md"
+    "docUrl": "docs/Tempo.md",
+    "link": ""
   },
   {
     "id": "apk安装软件",
@@ -83,6 +87,7 @@ const PROJECTS = [
     "fileSize": "6.1 MB",
     "updateDate": "",
     "downloadUrl": "downloads/apk%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6.apk",
-    "docUrl": ""
+    "docUrl": "",
+    "link": ""
   }
 ];

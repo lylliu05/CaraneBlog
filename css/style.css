@@ -127,6 +127,38 @@ a:hover {
   padding: 56px 0 60px;
 }
 
+.section-head {
+  margin-bottom: 30px;
+}
+
+.section-title {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.section-sub {
+  margin-top: 4px;
+  font-size: 14.5px;
+  color: var(--text-light);
+}
+
+/* 第二个版块（推荐应用）与上一版块保持间距 */
+.projects.recommended {
+  padding-top: 8px;
+}
+
+.empty-hint {
+  grid-column: 1 / -1;
+  padding: 48px 24px;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.6);
+  color: var(--text-light);
+  font-size: 14.5px;
+  text-align: center;
+}
+
 .project-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));

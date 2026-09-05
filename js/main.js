@@ -1,46 +1,86 @@
 /**
- * 1) 根据 js/data.js 中的 PROJECTS 配置渲染项目卡片
- * 2) "查看文档"：站内弹窗加载 docs/*.md 并渲染，不跳转外部页面
+ * 1) 根据 js/data.js（PROJECTS）与 js/recommend-data.js（RECOMMENDED）
+ *    分别渲染「项目」与「推荐应用」两个版块的卡片
+ * 2) "查看文档"：站内弹窗加载 *.md 并渲染，不跳转外部页面
  */
 (function () {
-  const grid = document.getElementById("project-grid");
-  if (!grid || typeof PROJECTS === "undefined") return;
+  const grids = [
+    {
+      list: typeof PROJECTS !== "undefined" ? PROJECTS : [],
+      el: document.getElementById("project-grid"),
+      emptyText: "暂无项目，将安装包与文档放入 downloads/ 与 docs/ 即可自动展示。",
+    },
+    {
+      list: typeof RECOMMENDED !== "undefined" ? RECOMMENDED : [],
+      el: document.getElementById("recommend-grid"),
+      emptyText: "暂无推荐应用，将安装包与文档放入 recommend/apps/ 与 recommend/docs/ 即可自动展示。",
+    },
+  ];
+
+  const allApps = grids[0].list.concat(grids[1].list);
 
   const downloadIcon =
     '<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
     '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>';
+  const linkIcon =
+    '<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+    '<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
 
-  PROJECTS.forEach(function (p, i) {
-    const card = document.createElement("article");
-    card.className = "project-card";
-    card.style.animationDelay = i * 0.08 + "s";
-
-    const tags = (p.tags || [])
-      .map(function (t) {
-        return '<span class="tag">' + t + "</span>";
-      })
-      .join("");
-
-    const meta = [p.platform, p.version, p.fileSize, p.updateDate]
-      .filter(Boolean)
-      .join(" · ");
-
-    card.innerHTML =
-      '<div class="card-head">' +
-      '  <span class="project-icon">' + (p.icon || "📦") + "</span>" +
-      "  <div>" +
-      '    <h3 class="card-title">' + p.name + "</h3>" +
-      '    <div class="card-meta">' + meta + "</div>" +
-      "  </div>" +
-      "</div>" +
-      '<p class="project-desc">' + (p.tagline ? "<strong>" + p.tagline + "</strong><br>" : "") + (p.description || "") + "</p>" +
-      (tags ? '<div class="tag-list">' + tags + "</div>" : "") +
-      '<div class="card-actions">' +
-      '  <a class="btn-download" href="' + p.downloadUrl + '" download>' + downloadIcon + "下载" + (p.version ? " " + p.version : p.fileSize ? " " + p.fileSize : "") + "</a>" +
+  function buildActions(p) {
+    // 主按钮：本地安装包优先；没有则用外部链接（recommend-meta.json 的 link 字段）
+    const primary = p.downloadUrl
+      ? '<a class="btn-download" href="' + p.downloadUrl + '" download>' + downloadIcon + "下载" + (p.version ? " " + p.version : p.fileSize ? " " + p.fileSize : "") + "</a>"
+      : p.link
+      ? '<a class="btn-download" href="' + p.link + '" target="_blank" rel="noopener">' + linkIcon + (p.linkLabel || "前往下载") + "</a>"
+      : "";
+    // 次按钮：文档弹窗；本地安装包与外链同时存在时，外链作为附加按钮
+    const secondary =
       (p.docUrl ? '<button class="btn-secondary" type="button" data-doc="' + p.docUrl + '">查看文档</button>' : "") +
-      "</div>";
+      (p.downloadUrl && p.link
+        ? '<a class="btn-secondary" href="' + p.link + '" target="_blank" rel="noopener">' + (p.linkLabel || "官网链接") + "</a>"
+        : "");
+    return '<div class="card-actions">' + primary + secondary + "</div>";
+  }
 
-    grid.appendChild(card);
+  function renderCards(list, grid, emptyText) {
+    if (!grid) return;
+    if (!list.length) {
+      grid.innerHTML = '<div class="empty-hint">' + emptyText + "</div>";
+      return;
+    }
+    list.forEach(function (p, i) {
+      const card = document.createElement("article");
+      card.className = "project-card";
+      card.style.animationDelay = i * 0.08 + "s";
+
+      const tags = (p.tags || [])
+        .map(function (t) {
+          return '<span class="tag">' + t + "</span>";
+        })
+        .join("");
+
+      const meta = [p.platform, p.version, p.fileSize, p.updateDate]
+        .filter(Boolean)
+        .join(" · ");
+
+      card.innerHTML =
+        '<div class="card-head">' +
+        '  <span class="project-icon">' + (p.icon || "📦") + "</span>" +
+        "  <div>" +
+        '    <h3 class="card-title">' + p.name + "</h3>" +
+        '    <div class="card-meta">' + meta + "</div>" +
+        "  </div>" +
+        "</div>" +
+        '<p class="project-desc">' + (p.tagline ? "<strong>" + p.tagline + "</strong><br>" : "") + (p.description || "") + "</p>" +
+        (tags ? '<div class="tag-list">' + tags + "</div>" : "") +
+        buildActions(p);
+
+      grid.appendChild(card);
+    });
+  }
+
+  grids.forEach(function (g) {
+    renderCards(g.list, g.el, g.emptyText);
   });
 
   // ---------- 文档弹窗 ----------
@@ -67,12 +107,19 @@
     if (e.key === "Escape" && !modal.hidden) closeModal();
   });
 
-  grid.addEventListener("click", function (e) {
-    const btn = e.target.closest("[data-doc]");
-    if (!btn) return;
-    const url = btn.getAttribute("data-doc");
-    const project = PROJECTS.find(function (p) { return p.docUrl === url; });
-    docTitle.textContent = project ? project.name : "文档";
+  grids.forEach(function (g) {
+    if (g.el) {
+      g.el.addEventListener("click", function (e) {
+        const btn = e.target.closest("[data-doc]");
+        if (!btn) return;
+        openDoc(btn.getAttribute("data-doc"));
+      });
+    }
+  });
+
+  function openDoc(url) {
+    const app = allApps.find(function (p) { return p.docUrl === url; });
+    docTitle.textContent = app ? app.name : "文档";
     content.innerHTML = '<p class="doc-loading">正在加载文档…</p>';
     openModal();
 
@@ -94,7 +141,7 @@
       .catch(function () {
         content.innerHTML = '<p class="doc-loading">文档加载失败，请稍后重试。</p>';
       });
-  });
+  }
 
   // ---------- 轻量 Markdown 渲染（标题/段落/列表/表格/代码块/引用/粗体/行内代码/链接） ----------
   function escapeHtml(s) {
