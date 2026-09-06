@@ -44,14 +44,14 @@ const PROJECTS = [
     "id": "CaraneVideo",
     "name": "CaraneVideo",
     "icon": "📦",
-    "version": "v0.1.4",
+    "version": "v0.1.8",
     "platform": "Android",
     "tagline": "",
     "description": "一个基于 Android 原生开发的多格式视频播放器。",
     "tags": [],
     "fileSize": "64 MB",
     "updateDate": "",
-    "downloadUrl": "downloads/CaraneVideov0.1.4.apk",
+    "downloadUrl": "downloads/CaraneVideov0.1.8.apk",
     "docUrl": "docs/CaraneVideo.md",
     "link": ""
   },
@@ -73,21 +73,6 @@ const PROJECTS = [
     "updateDate": "",
     "downloadUrl": "downloads/Tempo.apk",
     "docUrl": "docs/Tempo.md",
-    "link": ""
-  },
-  {
-    "id": "apk安装软件",
-    "name": "apk安装软件",
-    "icon": "📦",
-    "version": "",
-    "platform": "Android",
-    "tagline": "",
-    "description": "",
-    "tags": [],
-    "fileSize": "6.1 MB",
-    "updateDate": "",
-    "downloadUrl": "downloads/apk%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6.apk",
-    "docUrl": "",
     "link": ""
   }
 ];

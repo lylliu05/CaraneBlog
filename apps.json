@@ -19,21 +19,12 @@
       "minSupportVersion": 0
     },
     "com.caranevideo.app": {
-      "versionCode": 4,
-      "versionName": "0.1.4",
+      "versionCode": 8,
+      "versionName": "0.1.8",
       "updateLog": "",
       "forceUpdate": false,
-      "apkUrl": "https://lylliu05.github.io/CaraneBlog/downloads/CaraneVideov0.1.4.apk",
+      "apkUrl": "https://lylliu05.github.io/CaraneBlog/downloads/CaraneVideov0.1.8.apk",
       "fileSize": "64 MB",
-      "minSupportVersion": 0
-    },
-    "com.iumlab.fxxk1installer": {
-      "versionCode": 5,
-      "versionName": "1.4",
-      "updateLog": "",
-      "forceUpdate": false,
-      "apkUrl": "https://lylliu05.github.io/CaraneBlog/downloads/apk%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6.apk",
-      "fileSize": "6.1 MB",
       "minSupportVersion": 0
     },
     "com.tempo.app": {

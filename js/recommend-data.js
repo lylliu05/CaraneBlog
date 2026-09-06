@@ -3,4 +3,20 @@
  * 新增推荐应用：安装包放入 recommend/apps/、文档放入 recommend/docs/（同名配对），push 即自动出现在网页上。
  * 元数据（标题/图标/描述/外部链接等）可在 scripts/recommend-meta.json 中覆盖。
  */
-const RECOMMENDED = [];
+const RECOMMENDED = [
+  {
+    "id": "apk.1",
+    "name": "apk.1",
+    "icon": "⭐",
+    "version": "",
+    "platform": "Android",
+    "tagline": "",
+    "description": "",
+    "tags": [],
+    "fileSize": "6.1 MB",
+    "updateDate": "",
+    "downloadUrl": "recommend/apps/apk.1.apk",
+    "docUrl": "",
+    "link": ""
+  }
+];
