@@ -1,20 +1,29 @@
 {
   "apps": {
+    "com.caraneball.gravity": {
+      "versionCode": 1,
+      "versionName": "0.1.1",
+      "updateLog": "",
+      "forceUpdate": false,
+      "apkUrl": "https://lylliu05.github.io/CaraneBlog/downloads/CaraneBallv0.1.1.apk",
+      "fileSize": "4.5 MB",
+      "minSupportVersion": 0
+    },
     "com.caranelovelife": {
       "versionCode": 8,
       "versionName": "0.1.8",
       "updateLog": "",
       "forceUpdate": false,
-      "apkUrl": "https://lylliu05.github.io/CaraneBlog/downloads/CaraneLoveLifev0.1.8.apk",
+      "apkUrl": "https://lylliu05.github.io/CaraneBlog/downloads/CaraneLoveLifev0.1.9.apk",
       "fileSize": "9.2 MB",
       "minSupportVersion": 0
     },
     "com.caraneplan.app": {
-      "versionCode": 11,
-      "versionName": "0.1.11",
+      "versionCode": 12,
+      "versionName": "0.1.12",
       "updateLog": "",
       "forceUpdate": false,
-      "apkUrl": "https://lylliu05.github.io/CaraneBlog/downloads/CaranePlanv0.1.11.apk",
+      "apkUrl": "https://lylliu05.github.io/CaraneBlog/downloads/CaranePlanv0.1.12.apk",
       "fileSize": "22 MB",
       "minSupportVersion": 0
     },
