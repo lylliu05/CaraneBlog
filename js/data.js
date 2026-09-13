@@ -89,5 +89,20 @@ const PROJECTS = [
     "downloadUrl": "downloads/CaraneBallv0.1.1.apk",
     "docUrl": "",
     "link": ""
+  },
+  {
+    "id": "CaraneBallv0.1.2",
+    "name": "CaraneBall",
+    "icon": "📦",
+    "version": "v0.1.2",
+    "platform": "Android",
+    "tagline": "",
+    "description": "",
+    "tags": [],
+    "fileSize": "4.5 MB",
+    "updateDate": "",
+    "downloadUrl": "downloads/CaraneBallv0.1.2.apk",
+    "docUrl": "",
+    "link": ""
   }
 ];
