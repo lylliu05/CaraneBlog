@@ -5,17 +5,32 @@
  */
 const PROJECTS = [
   {
+    "id": "CaraneBall",
+    "name": "CaraneBall · 引力球关系图（Android）",
+    "icon": "📦",
+    "version": "v0.1.3",
+    "platform": "Android",
+    "tagline": "",
+    "description": "用「引力球」模拟人际关系的安卓应用：每个人是一个球，关系越深互相吸引越强；**你**固定在底部中心，其余球自由运动。",
+    "tags": [],
+    "fileSize": "4.5 MB",
+    "updateDate": "",
+    "downloadUrl": "downloads/CaraneBallv0.1.3.apk",
+    "docUrl": "docs/CaraneBall.md",
+    "link": ""
+  },
+  {
     "id": "CaraneLoveLife",
     "name": "CaraneLoveLife",
     "icon": "📦",
-    "version": "v0.1.9",
+    "version": "v0.1.10",
     "platform": "Android",
     "tagline": "",
     "description": "一款**日常记录类** Android 应用，把生活的琐碎与心动都收进一个 App：**日记记录、账单汇总**是核心双引擎，同时贴心内置**经期**记录与**恋爱/暗恋**专属空间。纯本地存储，数据不上云，安心记录每一天。",
     "tags": [],
     "fileSize": "9.2 MB",
     "updateDate": "",
-    "downloadUrl": "downloads/CaraneLoveLifev0.1.9.apk",
+    "downloadUrl": "downloads/CaraneLoveLifev0.1.10.apk",
     "docUrl": "docs/CaraneLoveLife.md",
     "link": ""
   },
@@ -59,7 +74,7 @@ const PROJECTS = [
     "id": "Tempo",
     "name": "Tempo · 黄历",
     "icon": "📅",
-    "version": "",
+    "version": "v0.1.1",
     "platform": "Android",
     "tagline": "输入驱动的黄历",
     "description": "Tempo 是一款与传统黄历截然不同的 Android 应用。传统黄历仅基于\"天时\"给出通用宜忌，而 Tempo 在天时之外引入**地利**（节气 / 方位 / 宜忌）与**人事**（精力 / 情绪 / 当日要事）三个维度，生成每日专属简报，让用户获得\"被理解\"的体验。",
@@ -71,38 +86,8 @@ const PROJECTS = [
     ],
     "fileSize": "10 MB",
     "updateDate": "",
-    "downloadUrl": "downloads/Tempo.apk",
+    "downloadUrl": "downloads/Tempov0.1.1.apk",
     "docUrl": "docs/Tempo.md",
-    "link": ""
-  },
-  {
-    "id": "CaraneBallv0.1.1",
-    "name": "CaraneBall",
-    "icon": "📦",
-    "version": "v0.1.1",
-    "platform": "Android",
-    "tagline": "",
-    "description": "",
-    "tags": [],
-    "fileSize": "4.5 MB",
-    "updateDate": "",
-    "downloadUrl": "downloads/CaraneBallv0.1.1.apk",
-    "docUrl": "",
-    "link": ""
-  },
-  {
-    "id": "CaraneBallv0.1.2",
-    "name": "CaraneBall",
-    "icon": "📦",
-    "version": "v0.1.2",
-    "platform": "Android",
-    "tagline": "",
-    "description": "",
-    "tags": [],
-    "fileSize": "4.5 MB",
-    "updateDate": "",
-    "downloadUrl": "downloads/CaraneBallv0.1.2.apk",
-    "docUrl": "",
     "link": ""
   }
 ];

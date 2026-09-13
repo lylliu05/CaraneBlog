@@ -1,20 +1,20 @@
 {
   "apps": {
     "com.caraneball.gravity": {
-      "versionCode": 2,
-      "versionName": "0.1.2",
+      "versionCode": 3,
+      "versionName": "0.1.3",
       "updateLog": "",
       "forceUpdate": false,
-      "apkUrl": "https://lylliu05.github.io/CaraneBlog/downloads/CaraneBallv0.1.2.apk",
+      "apkUrl": "https://lylliu05.github.io/CaraneBlog/downloads/CaraneBallv0.1.3.apk",
       "fileSize": "4.5 MB",
       "minSupportVersion": 0
     },
     "com.caranelovelife": {
-      "versionCode": 9,
-      "versionName": "0.1.9",
+      "versionCode": 10,
+      "versionName": "0.1.10",
       "updateLog": "",
       "forceUpdate": false,
-      "apkUrl": "https://lylliu05.github.io/CaraneBlog/downloads/CaraneLoveLifev0.1.9.apk",
+      "apkUrl": "https://lylliu05.github.io/CaraneBlog/downloads/CaraneLoveLifev0.1.10.apk",
       "fileSize": "9.2 MB",
       "minSupportVersion": 0
     },
@@ -38,10 +38,10 @@
     },
     "com.tempo.app": {
       "versionCode": 1,
-      "versionName": "1.0.0",
+      "versionName": "0.1.1",
       "updateLog": "",
       "forceUpdate": false,
-      "apkUrl": "https://lylliu05.github.io/CaraneBlog/downloads/Tempo.apk",
+      "apkUrl": "https://lylliu05.github.io/CaraneBlog/downloads/Tempov0.1.1.apk",
       "fileSize": "10 MB",
       "minSupportVersion": 0
     }
