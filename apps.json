@@ -1,12 +1,12 @@
 {
   "apps": {
     "com.caranelovelife": {
-      "versionCode": 15,
-      "versionName": "0.1.15",
+      "versionCode": 16,
+      "versionName": "0.1.16",
       "updateLog": "",
       "forceUpdate": false,
-      "apkUrl": "https://lylliu05.github.io/CaraneBlog/downloads/CaraneLoveLifev0.1.15.apk",
-      "fileSize": "9.7 MB",
+      "apkUrl": "https://lylliu05.github.io/CaraneBlog/downloads/CaraneLoveLifev0.1.16.apk",
+      "fileSize": "9.8 MB",
       "minSupportVersion": 0
     },
     "com.caraneplan.app": {
