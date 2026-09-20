@@ -1,11 +1,11 @@
 {
   "apps": {
     "com.caranelovelife": {
-      "versionCode": 25,
-      "versionName": "0.1.25",
+      "versionCode": 26,
+      "versionName": "0.1.26",
       "updateLog": "",
       "forceUpdate": false,
-      "apkUrl": "https://lylliu05.github.io/CaraneBlog/downloads/CaraneLoveLifev0.1.25.apk",
+      "apkUrl": "https://lylliu05.github.io/CaraneBlog/downloads/CaraneLoveLifev0.1.26.apk",
       "fileSize": "9.8 MB",
       "minSupportVersion": 0
     },
