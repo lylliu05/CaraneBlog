@@ -1,9 +1,9 @@
 
 # CaranePlan（卡烷计划）
 
-> 版本：v0.1.6 | 日期：2026-08-30
+> 版本：v0.1.7 | 应用方向更新：2026-10-28
 >
-> 纯原生 Android 计时与任务管理应用，采用 Jetpack Compose + Kotlin 原生技术栈从零构建。
+> 定位：**自我观察与改善平台**——接地气地说，就是**帮你把日子过明白**。纯原生 Android 实现，Jetpack Compose + Kotlin 技术栈从零构建。
 
 ***
 
@@ -26,7 +26,17 @@
 
 ## 1. 项目概述
 
-CaranePlan（卡烷计划）是一个**纯原生 Android 计时与任务管理应用**，在技术实现上完全采用 Android 原生生态：
+### 1.1 应用定位：自我观察与改善平台
+
+CaranePlan（卡烷计划）不再只是一个"计时与任务管理"工具，而是一个**自我观察与改善平台**——接地气地说，就是**帮你把日子过明白**。核心是 **记录 → 观察 → 改善** 的闭环：
+
+1. **记录**：任务计时、日记备忘录、习惯养成、手机使用时长自动采集，把日子原样记下来；
+2. **观察**：数据页周报、双热力色带、周期趋势、STL 周期预测、手机使用归因（应用×任务关联分析），让你看清时间花在哪、日子过得怎么样；
+3. **改善**：今日推荐、周/月/项目计划、思维导图与甘特排期、周期复盘，让"看见"落地为行动。
+
+### 1.2 技术实现
+
+CaranePlan 是**纯原生 Android 应用**，在技术实现上完全采用 Android 原生生态：
 
 - **UI 层**：Jetpack Compose 声明式 UI
 - **数据层**：Room 本地数据库 + SQLCipher 全库加密
@@ -223,6 +233,20 @@ keyPassword=********
 - **底部导航栏**：在 Timer / TaskFlow / MindMap / Gantt / Dashboard 五个主页面显示，使用 `popUpTo + saveState + restoreState + launchSingleTop` 保留各模块状态。
 - **二级页面**：通过数据页（Dashboard）入口进入（未完成 / 归档 / 回收站 / 项目任务 / 习惯养成 / 历史报告），按系统返回键回到数据页，避免返回栈混乱。
 
+### 3.4 大模型接入与自动报表（可选）
+
+> 功能入口：消息页（Messages）右上角「接入」按钮。
+
+- **一键填充服务商**：支持豆包（火山方舟）、DeepSeek、OpenAI、智谱等 OpenAI 兼容 API，点击预设自动填入 API 地址与默认模型名。
+  - 豆包接入地址：`https://ark.cn-beijing.volces.com/api/v3`，模型可填模型 ID（如 `doubao-seed-1-6-250615`）或方舟推理接入点 ID（`ep-xxx`）。
+  - API Key 通过 SecurePreferences 加密存储，不落明文。
+- **选择模型**：选中服务商后，模型输入框下方出现「选择模型」按钮，点击弹窗列出该服务商常用模型（豆包 6 款 / DeepSeek 2 款 / OpenAI 4 款 / 智谱 5 款），点击即填入；未列出的模型仍可手动输入。
+- **导入配置文件**：点击「导入配置文件（JSON）」选择本地 JSON 文件，解析后自动保存为可复用预设，出现在「已导入的模型预设」列表中，点击即填充表单。支持嵌套格式（`name/type/config.baseUrl/config.apiKey/config.modelName/config.maxTokens/metadata`）与扁平格式。
+- **测试连接**：填写地址 / Key / 模型后点击「测试连接」，用最小请求（max_tokens=1）实际调用一次接口，弹窗展示模型应答（成功）或尽可能详细的失败原因（HTTP 状态码、API 错误码、网络异常分类等）。
+- **maxTokens**：可选字段，控制单次请求最大生成 token 数，不填则由服务端默认决定。
+- **自动报表**：开启日报 / 周报 / 月报 / 年报开关后，由 AlarmManager 定时汇总日记、任务、计时与应用使用数据，调用大模型生成分析卡片展示在消息页。
+- **错误提示**：模型调用失败时不再静默返回空串，而是结构化上抛错误（配置错误 / HTTP 错误 / 网络错误 / 解析失败 / 返回为空），在「测试连接」弹窗、消息页报表失败弹窗与失败卡片中展示详细信息。
+
 ***
 
 ## 4. 核心功能
@@ -267,6 +291,7 @@ keyPassword=********
 | 项目任务页        | `ProjectTaskScreen`、`ProjectTaskViewModel`                                | PROJECT_TASK 类型任务专项管理，套用周计划模板（按周日期范围筛选，前后翻页/回到本周）                          |
 | 习惯养成页        | `HabitTaskScreen`、`HabitTaskViewModel`                                    | HABIT_TRACKER 类型任务专项管理                                                |
 | 设置弹窗         | `SettingsDialog`                                                           | 显示已完成任务开关、左滑/右滑操作配置（删除/完成/开始计时），从 ProfileScreen 迁移                |
+| 大模型接入与自动报表 | `LLMConfigScreen`、`LLMConfigViewModel`、`LLMRepositoryImpl`、`GenerateReportUseCase`、`MessagesScreen`、`MessagesViewModel`、`LLMConfigStore`、`ImportedModelConfig`、`ModelConfigFileDto` | 消息页右上角「接入」配置 OpenAI 兼容 API（含豆包/火山方舟、DeepSeek、OpenAI、智谱预设一键填充，Key 加密存储）；选择服务商后可从常用模型列表弹窗中挑选模型；支持导入 JSON 配置文件持久化为可复用预设；「测试连接」用最小请求实测接口并弹窗展示成功应答或详细失败原因；可选 maxTokens；开启日报/周报/月报/年报定时自动生成分析卡片；调用失败结构化上抛（HTTP 状态码 / API 错误码 / 网络异常等）并在测试弹窗、报表失败弹窗与失败卡片中展示；网络调用强制 IO 线程避免主线程异常 |
 | 备忘录          | `MemoScreen`、`MemoViewModel`、`MemoEditScreen`、`MemoEditViewModel`、`MemoTrashScreen`、`MemoTrashViewModel`、`MemoCard`、`PullDownReturnBar`、`VaultPickerDialog`、`MemoBlockEditor`、`MemoEditToolbar`、`MemoRepositoryImpl`、`PrivateMemoStorageBackend`、`ObsidianMemoStorageBackend`、`MemoMarkdownParser` | 计时页下拉进入，列表页下拉返回；块编辑器（段落/标题/列表/图片/链接 5 种块）；800ms 防抖自动保存；双后端可切换（app 私有目录 .md ↔ Obsidian vault 子目录，自动迁移）；图片附件用 `![[xxx.png]]` wikilink 语法；底部工具栏（Obsidian 风格，键盘上方，行内格式 + 块级 + 插入 + 工具）；软删除到 .trash 子目录，回收站支持单条恢复/彻底删除/清空；全文搜索匹配标题与正文文本块；标题块右侧显示 H1~H3 级别标签；`- [ ]` / `- [*]` 解析为列表项，`- [x]` 才触发待办块；内部链接点击带 heading 锚点跳转定位 |
 | 数据管理         | `DataManagementDialog`                                                     | 任务数据导出（JSON）/ 导入 / 清空，四态弹窗（菜单/导出结果/导入输入/清空确认），IO 线程导出防闪退      |
 | 今日推荐算法       | `RecommendationCalculator`、`WeeklyReportViewModel`                       | 基于过去 30 天历史，按工作日/周末分类 + 指数衰减加权平均，计算今日推荐任务数与计时时长               |
@@ -393,7 +418,7 @@ android {
         applicationId = "com.caraneplan.app"
         minSdk = 24
         targetSdk = 35
-        versionCode = 6
+        versionCode = 7
         versionName = "0.1.6"
     }
     compileOptions {
@@ -1338,8 +1363,9 @@ ACTION_STOP_ALERTS 广播
 | v4.8.5 环境标签合理值双模式 | 新增 `LabelQuota`（mode + value）数据模型与 `LabelQuotaMode`（PERCENTAGE / WEEKLY_COUNT）枚举（`domain/model/LabelQuota.kt`）；`UserPreferences` 用 `labelQuotaFlow`/`saveLabelQuotas`/`resetLabelQuotas`/`DEFAULT_LABEL_QUOTAS` 替代原 `labelRatioFlow` 系列（DataStore key 从 `label_ratio` 改为 `label_quota`），默认值中社交从 4% 改为每周固定 2 个（WEEKLY_COUNT 模式），其余标签保持百分比模式；`DashboardViewModel`/`HistoryReportViewModel` 转发 `labelQuotas`；`AccountSettingsScreen` 原 `LabelRatioEditDialog` 重构为 `LabelQuotaEditDialog`，每个标签可用 `FilterChip` 切换"百分比/每周"模式并输入对应数值，底部仅统计百分比模式合计；`EnvironmentTagDetailDialog` 支持双模式：PERCENTAGE 沿用今日占比逻辑，WEEKLY_COUNT 显示"本周 X/N 个"并按本周一到今天累计（新增 `calcWeekDaysElapsed` 函数）计算状态（本周还需 / 超额 / 已达标） | ✅  |
 | v4.8.6 归档/回收站甘特图化 | 归档页与回收站页改用甘特图页面模板（新增 `ArchiveTrashGanttTemplate.kt`）：归档页按 `completedAt` 定位任务条、回收站页按 `deletedAt` 定位（新增 `GanttItemBuilder.kt`，支持自定义 `dateExtractor` 构建单日锚点甘特条）；`GanttChart` / `GanttTaskBar` / `GanttDetailSheet` 的拖拽回调改为可空（`onTaskDragEnd` / `onDragEnd` 为 null 时禁用拖拽，归档/回收只读）；移除两页的 FAB 新建按钮，保留顶栏"清空"操作；详情弹窗复用 `GanttDetailSheet`，新增 `onReactivate`（归档页"重新激活"按钮）与 `onRestore`（回收站页"恢复"按钮）可选回调；回收站永久删除带二次确认弹窗；`CompletedViewModel` / `TrashViewModel` 重写为基于 `observeCompletedTasks` / `observeTrashedTasks` + 月份锚点 + 折叠状态生成甘特任务条列表 | ✅ |
 | v4.9.0 思维导图图谱视图 | 思维导图新增 Obsidian Graph 风格图谱视图并支持双视图切换：`ForceGraphCanvas.kt` 实现径向树布局（`GraphRadialSim`，子任务按叶节点比例瓜分父节点角度扇区、逐层向外、连线零交叉，节点半径随子孙数增长 7→15dp，环间距 80dp，动画平滑过渡）；`MindMapScreen.kt` 顶栏新增"树形/图谱"视图切换，长按节点折叠子树在两种视图下通用 | ✅ |
+| v0.1.8 应用方向重新明确 | 定位从"计时与任务管理应用"升级为"**自我观察与改善平台**"（记录→观察→改善闭环），README 概述章节重写；品牌名、包名、applicationId 均不变 | ✅ |
 
-> **版本号说明**：上述版本号沿用项目早期内部阶段标记。当前发布版本为 **v0.1.6**（`versionCode = 6`），`applicationId = "com.caraneplan.app"`，品牌名 **CaranePlan（卡烷计划）**。代码包名 `com.anoneapk.timer` 为历史遗留，与 `applicationId` 解耦，不影响应用身份。
+> **版本号说明**：上述版本号沿用项目早期内部阶段标记。当前发布版本为 **v0.1.7**（`versionCode = 7`），`applicationId = "com.caraneplan.app"`，品牌名 **CaranePlan（卡烷计划）**。代码包名 `com.anoneapk.timer` 为历史遗留，与 `applicationId` 解耦，不影响应用身份。
 
 ### 11.2 未来扩展
 
