@@ -10,11 +10,11 @@
       "minSupportVersion": 0
     },
     "com.caraneplan.app": {
-      "versionCode": 21,
-      "versionName": "0.1.21",
+      "versionCode": 23,
+      "versionName": "0.1.23",
       "updateLog": "",
       "forceUpdate": false,
-      "apkUrl": "https://lylliu05.github.io/CaraneBlog/downloads/CaranePlanv0.1.21.apk",
+      "apkUrl": "https://lylliu05.github.io/CaraneBlog/downloads/CaranePlanv0.1.23.apk",
       "fileSize": "22 MB",
       "minSupportVersion": 0
     },
