@@ -1,21 +1,21 @@
 {
   "apps": {
     "com.caranelovelife": {
-      "versionCode": 30,
-      "versionName": "0.1.30",
+      "versionCode": 31,
+      "versionName": "0.1.31",
       "updateLog": "",
       "forceUpdate": false,
-      "apkUrl": "https://lylliu05.github.io/CaraneBlog/downloads/CaraneLoveLifev0.1.30.apk",
-      "fileSize": "9.8 MB",
+      "apkUrl": "https://lylliu05.github.io/CaraneBlog/downloads/CaraneLoveLifev0.1.31.apk",
+      "fileSize": "56 MB",
       "minSupportVersion": 0
     },
     "com.caraneplan.app": {
-      "versionCode": 23,
-      "versionName": "0.1.23",
+      "versionCode": 24,
+      "versionName": "0.1.24",
       "updateLog": "",
       "forceUpdate": false,
-      "apkUrl": "https://lylliu05.github.io/CaraneBlog/downloads/CaranePlanv0.1.23.apk",
-      "fileSize": "22 MB",
+      "apkUrl": "https://lylliu05.github.io/CaraneBlog/downloads/CaranePlanv0.1.24.apk",
+      "fileSize": "23 MB",
       "minSupportVersion": 0
     },
     "com.caranevideo.app": {
