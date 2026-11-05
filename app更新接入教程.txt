@@ -152,3 +152,43 @@ btnCheckUpdate.setOnClickListener { AppUpdate.check(this) }
 push APK 后约 1~2 分钟生效（Actions 运行 + Pages 部署），?t= 参数已避免 CDN 缓存
 下载走系统 DownloadManager（有通知栏进度、断点续传），比直接浏览器打开 APK 链接可靠
 若配置了 updateLog（scripts/update-config.json），更新弹窗会展示；没配置则显示默认文案
+
+
+============================================================
+PC 端（卡烷计划PC）—— 走 GitHub Releases，不用 apps.json
+============================================================
+PC 端不读 apps.json，直接查本仓库的 Releases 列表：
+  https://api.github.com/repos/lylliu05/CaraneBlog/releases
+它按 tag 前缀 pc-v 区分是哪个 App 的版本，取版本号最大的那个。
+
+约定
+  tag        pc-v0.1.2              （pc-v 前缀把 PC 版和几个安卓 App 区分开）
+  附件       名字含 setup 的 .exe    （如 CaranePlanPC-0.1.2-x64-setup.exe）
+  更新日志   release 的正文
+  可选指令   正文里单独两行，客户端会解析并从弹窗日志里去掉：
+             forceUpdate: true
+             minSupportVersion: 0.1.0
+
+版本号来源
+  E:\Project\CaranePlan\CaranePcPlan\src-tauri\tauri.conf.json 的 version
+  （Cargo.toml、package.json 三处保持同一个版本号；客户端 versionCode = 主*10000+次*100+修订）
+
+发版步骤（二选一）
+  A. 网页手动
+     1) PC 工程改好版本号 → npm run tauri build
+     2) 本仓库 Releases → Draft a new release
+     3) tag 填 pc-v0.1.2，标题随意，正文写更新说明
+     4) 上传 卡烷计划PC_0.1.2_x64-setup.exe（建议改名为 CaranePlanPC-0.1.2-x64-setup.exe）
+     5) Publish release
+  B. 用脚本（自动建 tag + 建 release + 传附件）
+     $env:GITHUB_TOKEN = "ghp_xxx"        # 需要 repo 权限，新开终端要重配
+     .\publish-pc.ps1 -Notes "1.修复XX 2.新增XX"
+     .\publish-pc.ps1 -Notes "..." -Force              # 强制更新
+     .\publish-pc.ps1 -Notes "..." -MinSupport 0.1.0
+     .\publish-pc.ps1 -DryRun                          # 先看会做什么
+
+客户端行为
+  启动静默检查（失败不打扰）；顶栏右侧 v0.1.1 按钮可手动检查；
+  弹窗里下载（带进度条）→ 下载完拉起安装包 → 应用自动退出。
+  GitHub 未认证 API 限流 60 次/小时/IP，只在启动和手点检查时请求。
+  安卓端和 PC 端的更新机制互不影响：安卓仍走 apps.json，PC 走 Releases。

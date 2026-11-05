@@ -13,3 +13,6 @@ desktop.ini
 # 日志与临时文件
 *.log
 *.tmp
+
+# PC 发版脚本的附件暂存目录
+release-assets/
